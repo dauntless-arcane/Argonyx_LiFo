@@ -60,6 +60,63 @@
       color: #7f76b9;
     }
 
+    /* User Icon with Image */
+    .user-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .user-image:hover {
+      transform: scale(1.1);
+      filter: brightness(1.2);
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    #user-icon {
+      font-size: 1.5em;
+      cursor: pointer;
+      color: white;
+      transition: color 0.3s;
+    }
+
+    #user-icon:hover {
+      color: #7f76b9;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #333;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      min-width: 160px;
+      z-index: 100;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 1.1em;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
     /* Sidebar */
     .sidebar {
       position: fixed;
@@ -70,22 +127,13 @@
       background-color: transparent;
       z-index: 999;
       transition: left 0.3s ease-in-out;
-      padding: 50px 20px;
-    }
-
-    .sidebar.active {
-      left: 0;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
+      padding: 80px 20px 20px 20px;
     }
 
     .sidebar ul li {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .sidebar ul li a {
@@ -99,6 +147,15 @@
 
     .sidebar ul li:hover a {
       opacity: 1;
+    }
+
+    .sidebar ul li .text-hover {
+      display: none;
+      margin-left: 10px;
+    }
+
+    .sidebar ul li:hover .text-hover {
+      display: inline;
     }
 
     .sidebar ul li img {
@@ -152,60 +209,6 @@
       text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
     }
 
-    /* Section */
-    .section {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 50px 20px;
-      margin-top: 150px;
-      background-color: #001e36;
-    }
-
-    .section-content {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      max-width: 1200px;
-    }
-
-    .section-image img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 10px;
-    }
-
-    .section-text {
-      max-width: 500px;
-    }
-
-    .section-text h2 {
-      font-size: 28px;
-      font-family: 'Creato Display', sans-serif;
-      color: #fff;
-    }
-
-    .section-text p {
-      font-size: 16px;
-      color: #ccc;
-      margin: 20px 0;
-    }
-
-    .btn-book {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 16px;
-      color: white;
-      background-color: #4CAF50;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: background-color 0.3s;
-    }
-
-    .btn-book:hover {
-      background-color: #45a049;
-    }
-
     /* Carousel Section */
     .carousel-container {
       position: relative;
@@ -236,52 +239,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
-    button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      z-index: 10;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-    }
-
-    button.prev {
-      left: 10px;
-    }
-
-    button.next {
-      right: 10px;
-    }
-
-    button:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Arrow styling */
-    button.prev::before, button.next::before {
-      content: '';
-      display: block;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 15px solid white;
-    }
-
-    button.next::before {
-      border-top: none;
-      border-left: 15px solid white;
-    }
-
     /* Responsiveness */
     @media (max-width: 768px) {
       .carousel img {
@@ -296,16 +253,22 @@
   </style>
 </head>
 <body>
-  <!-- Navbar -->
   <div class="navbar">
     <div class="logo" id="logo">
-      <img src="../index/s-l1200.jpg" alt="Logo">
+      <img src="l1200.jpg" alt="Logo">
     </div>
     <div class="nav-links">
       <a href="../homepage/homepage2.html">Home</a>
       <a href="../bookings/bookings.html">Trip & Bookings</a>
       <a href="about.html">About Us</a>
-      <a href="../signin/signin.html">Login</a>
+
+      <div class="dropdown">
+        <img src="profile.png" alt="User" id="user-icon" class="user-image">
+        <div class="dropdown-content" id="dropdown-content">
+          <a href="profile.html">View Profile</a>
+          <a href="../index/index.html">Logout</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -315,32 +278,32 @@
     <ul>
       <li>
         <a href="explore.html">
-          <img src="images/map.png" alt="Explore" class="sidebar-icon">
+          <img src="map.png" class="sidebar-icon">
           <span class="text-hover">Explore</span>
         </a>
       </li>
       <li>
         <a href="eat.html">
-          <img src="images/eating.png" alt="Eat" class="sidebar-icon">
+          <img src="eating.png" class="sidebar-icon">
           <span class="text-hover">Eat</span>
         </a>
       </li>
       <li>
         <a href="shopping.html">
-          <img src="images/shopping.png" alt="Shopping" class="sidebar-icon">
+          <img src="shopping.png" class="sidebar-icon">
           <span class="text-hover">Shopping</span>
         </a>
       </li>
       <li>
-        <a href="review.html">
-          <img src="images/like.png" alt="Review" class="sidebar-icon">
-          <span class="text-hover">Review</span>
+        <a href="events.html">
+          <img src="event.png" class="sidebar-icon">
+          <span class="text-hover">Events</span>
         </a>
       </li>
       <li>
-        <a href="contact.html">
-          <img src="images/phone-call.png" alt="Contact" class="sidebar-icon">
-          <span class="text-hover">Contact Us</span>
+        <a href="events.html">
+          <img src="like.png" class="sidebar-icon">
+          <span class="text-hover">Reviews</span>
         </a>
       </li>
     </ul>
@@ -349,82 +312,44 @@
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- Section with Background Image -->
+  <!-- Background Image -->
   <div class="background-image">
     <div class="hero-text">
-      Discover the World With Us
+      Explore our city like never before.
     </div>
   </div>
 
-  <!-- Section with Image and Text -->
-  <div class="section">
-    <div class="section-content">
-      <div class="section-image">
-        <img src="tripimage.jpg" alt="Trip Image">
-      </div>
-      <div class="section-text">
-        <h2>Explore the Best Destinations</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor augue et est egestas, non dictum elit vestibulum.</p>
-        <a href="#" class="btn-book">Book Now</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- Carousel Section -->
-  <!-- Carousel Section (Moved here after the section) -->
-  <div class="carousel-container">
-    <div class="carousel">
-        <img src="bglr.png" alt="Bangalore">
-        <img src="chennai.png" alt="Chennai">
-        <img src="delhi.png" alt="Delhi">
-        <img src="goa.png" alt="Goa">
-        <img src="mumbai.png" alt="Mumbai">
-        <img src="punjab.png" alt="Punjab">
-        
-    </div>
-    <button class="prev" onclick="moveSlide(-1)">Prev</button>
-  <button class="next" onclick="moveSlide(1)">Next</button>
-  </div>
 
   <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const closeBtn = document.getElementById('close-btn');
+    // Sidebar Toggle
+    document.getElementById('logo').onclick = function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+      overlay.classList.toggle('active');
+    };
 
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.add('active');
-      overlay.classList.add('active');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      sidebar.classList.remove('active');
+    document.getElementById('close-btn').onclick = function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = '-250px';
       overlay.classList.remove('active');
-    });
+    };
 
-    overlay.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-    });
-    // Carousel Controls
-    const carousel = document.querySelector('.carousel');
-    const prevButton = document.querySelector('.prev');
-    const nextButton = document.querySelector('.next');
-    let index = 0;
+    // Dropdown Toggle
+    document.getElementById('user-icon').onclick = function() {
+      const dropdown = document.getElementById('dropdown-content');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    };
 
-    prevButton.addEventListener('click', () => {
-      index = (index > 0) ? index - 1 : 2;
-      updateCarousel();
-    });
-
-    nextButton.addEventListener('click', () => {
-      index = (index < 2) ? index + 1 : 0;
-      updateCarousel();
-    });
-
-    function updateCarousel() {
-      carousel.style.transform = `translateX(-${index * 33.33}%)`;
-    }
+    // Carousel auto-slide
+    let carouselIndex = 0;
+    setInterval(() => {
+      const carousel = document.querySelector('.carousel');
+      carouselIndex = (carouselIndex + 1) % 3;
+      carousel.style.transform = `translateX(-${carouselIndex * 100}%)`;
+    }, 3000);
   </script>
 </body>
 </html>
