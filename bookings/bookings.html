@@ -133,61 +133,20 @@
     .show {
       display: block;
     }
-    .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent; /* Colorless navbar */
-  padding: 10px 20px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo img {
-  height: 40px;
-  width: auto;
-}
-
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 8px 12px;
-  font-size: 1.1em;
-  transition: color 0.3s, background-color 0.3s;
-}
-
-.nav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #7f76b9;
-}
   </style>
 </head>
 <body>
   <header>
-    <div class="navbar">
-      <div class="logo">
-        <img src="l1200.jpg" alt="Logo"> <!-- Corrected path -->
-      </div>
-      <div class="nav-links">
-        <a href="../index/index.html" class="nav-link">Home</a>
-        <a href="../bookings/bookings.html" class="nav-link">Trip & Bookings</a>
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="../signin/signin.html" class="nav-link">Login</a>
-      </div>
-    </div>
+    <nav class="navbar">
+      <a href="../homepage/homepage2.html" class="nav-link">Home</a>
+      <a href="bookings.html" class="nav-link button-link">Bookings</a>
+      <a href="../signin/signin.html" class="nav-link">Login</a>
+    </nav>
   </header>
   <main>
     <div class="form-container">
       <h2>Book Your Travel</h2>
-      <form action="Explore.html" method="get">
+      <form action="./Booking_Details/new.html" method="get">
         <input type="text" placeholder="Name" required>
         <input type="number" placeholder="Age" required>
         <input type="date" placeholder="Start Date" required>
@@ -198,7 +157,7 @@
           <option value="mumbai">Mumbai</option>
           <option value="goa">Goa</option>
         </select>
-        <button type="submit"><h3>Explore</h3></button>
+        <button type="submit"><h3>Booking Details</h3></button>
       </>
     </div>
   </main>
