@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('acct.jpg'); /* Local path to your image */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff; /* Change text color to white for better contrast */
+    }
+
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.7); /* Dark background with some transparency */
+      padding: 40px;
+      border-radius: 8px;
+      width: 400px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: #fff; /* White color for headings */
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: block;
+      color: #ddd; /* Light gray for labels */
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background-color: #333; /* Dark input background */
+      color: #fff; /* White text inside inputs */
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #4CAF50; /* Green focus border */
+    }
+
+    .error {
+      color: #ff6347; /* Light red for errors */
+      font-size: 12px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .btn-next {
+      background-color: #00bfff;
+    }
+
+    .btn-next:hover {
+      background-color: #0098cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Create Account</h2>
+    <form id="createAccountForm">
+      <!-- Step 1: Account Information -->
+      <div id="step1" class="form-step active">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email ID</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <div class="error" id="passwordError"></div>
+        <button type="button" class="btn btn-next" onclick="nextStep(1)">Next</button>
+      </div>
+
+      <!-- Step 2: Personal Information -->
+      <div id="step2" class="form-step">
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="Enter your city" required>
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" placeholder="Enter your state" required>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option value="" disabled selected>Select your country</option>
+            <option value="USA">USA</option>
+            <option value="India">India</option>
+            <option value="UK">UK</option>
+          </select>
+        </div>
+        <button type="button" class="btn" onclick="createAccount()">Create Account</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Switch to the next step
+    function nextStep(step) {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        document.getElementById('passwordError').textContent = 'Passwords do not match.';
+      } else {
+        document.getElementById('passwordError').textContent = '';
+        document.getElementById('step' + step).classList.remove('active');
+        document.getElementById('step' + (step + 1)).classList.add('active');
+      }
+    }
+
+    // Create account and redirect to homepage2.html
+    function createAccount() {
+      window.location.href = '../homepage/homepage2.html'; // Redirect to homepage
+    }
+  </script>
+</body>
+</html>
