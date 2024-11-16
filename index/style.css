@@ -230,6 +230,7 @@ footer {
 }
 
 /* General styling for the explore section */
+/* General styling for the explore section */
 .explore-section {
   width: 100%;
   padding: 50px 0;
@@ -247,7 +248,7 @@ footer {
   width: 90%;
   margin: 10px;
   padding: 20px;
-  background-color: white;
+  background-color: #001e36;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -305,4 +306,3 @@ footer {
     width: 80%;
   }
 }
-
