@@ -3,279 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Explore</title>
-  <link href="https://fonts.googleapis.com/css2?family=Creato+Display&display=swap" rel="stylesheet">
+  <title>Travel Tours</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/icon/icon.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Nunito:wght@300;600&display=swap">
   <style>
-    /* General Styling */
-    body {
-      font-family: 'Creato Display', sans-serif;
+    /* CSS styles here */
+    * {
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
-      display: flex;
-      flex-direction: row;
+      box-sizing: border-box;
+      font-family: "Nunito", sans-serif;
     }
 
-    /* Navbar Styling */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: rgba(51, 51, 51, 0.8);
-      padding: 10px 20px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1001;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    body {
+      background: #162561;
+      background-image: radial-gradient(circle at 20% 100%, rgba(184, 184, 184, 0.1) 0%, rgba(184, 184, 184, 0.1) 33%, rgba(96, 96, 96, 0.1) 33%, rgba(96, 96, 96, 0.1) 66%, rgba(7, 7, 7, 0.1) 66%, rgba(7, 7, 7, 0.1) 99%), linear-gradient(40deg, #040a22, #162561, #202e64, #6f7aa6);
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
-    .navbar .logo img {
-      width: 50px;
+    section {
+      display: grid;
+      grid-template-columns: 50% 45%;
+      place-items: center;
+      gap: 60px;
+      min-height: 100vh;
+      padding: 20px 60px;
+    }
+
+    .content {
+      max-width: 2400px;
+    }
+
+    .content h1 {
+      font-family: "Comfortaa", sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 1px;
+      margin-bottom: 36px;
+      color: #fff;
+    }
+
+    .content p {
+      font-size: clamp(0.9rem, 3vw, 1.25rem);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .content button {
+      background: #eaeaea;
+      color: #202134;
+      font-size: clamp(0.9rem, 4vw, 1rem);
+      font-weight: 600;
+      border: 0;
+      outline: 0;
+      padding: 8px 14px;
+      border-radius: 7px;
+      transform: scale(1);
+      transition: all 0.4s ease-in;
       cursor: pointer;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 20px;
+    .content button:is(:hover, :focus) {
+      transform: scale(0.98);
+      background-color: #6f7aa6;
+      color: #eaeaea;
     }
 
-    .nav-link {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      padding: 8px 12px;
-      transition: color 0.3s, background-color 0.3s;
-    }
-
-    .nav-link:hover {
-      background-color: #333;
-      color: #7f76b9;
-      border-radius: 5px;
-    }
-
-    /* Sidebar Styling */
-    .sidebar {
-      position: fixed;
-      top: 60px; /* Below navbar */
-      left: -250px; /* Initially hidden */
-      width: 250px;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding-top: 20px;
-      overflow-x: hidden;
-      transition: 0.3s;
-      z-index: 1000;
-    }
-
-    .sidebar.active {
-      left: 0;
-    }
-
-    .sidebar a {
-      padding: 10px 15px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #818181;
-      display: block;
-      transition: 0.3s;
-    }
-
-    .sidebar a:hover {
-      color: #f1f1f1;
-    }
-
-    .sidebar .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 36px;
-      color: #818181;
-      cursor: pointer;
-    }
-
-    /* Main Content Styling */
-    .main-content {
-      margin-left: 0;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 80px 20px 20px;
-    }
-
-    /* Search Bar and Card Styles */
-    .search-bar {
-      margin: 30px 0;
-      width: 80%;
-      max-width: 600px;
-      display: flex;
+    .swiper {
       position: relative;
-    }
-
-    .search-bar input {
       width: 100%;
-      padding: 12px 20px;
-      font-size: 18px;
-      border-radius: 25px;
-      border: 2px solid #333;
-      outline: none;
-    }
-
-    .search-bar button {
-      position: absolute;
-      right: 10px;
-      background-color: #333;
-      border: none;
-      border-radius: 50%;
-      padding: 10px;
-      color: white;
-      cursor: pointer;
-    }
-
-    .search-bar button:hover {
-      background-color: #555;
-    }
-
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      width: 100%;
-      max-width: 1200px;
-    }
-
-    .card {
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
+      height: 490px;
       overflow: hidden;
-      width: 300px;
-      transition: transform 0.3s;
     }
 
-    .card img {
+    .swiper-slide {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      user-select: none;
+      border-radius: 20px;
       width: 100%;
-      height: 180px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .swiper-slide:hover {
+      opacity: 1;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
       object-fit: cover;
-    }
-
-    .card-content {
-      padding: 15px;
-      text-align: center;
-    }
-
-    .card h3 {
-      margin: 0;
-      font-size: 20px;
-      color: #333;
-    }
-
-    .card p {
-      color: #777;
-      margin: 10px 0;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
     }
   </style>
 </head>
 <body>
-
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="logo">
-      <img src="file:///C:/Users/dell/Downloads/s-l1200.jpg" alt="Logo" id="menu-toggle">
-    </div>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="bookings.html" class="nav-link">Trip & Bookings</a>
-      <a href="about.html" class="nav-link">About Us</a>
-      <a href="signin.html" class="nav-link">Login</a>
-    </div>
-  </div>
-
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <span class="close-btn" id="close-btn">&times;</span>
-    <a href="explore.html">Explore</a>
-    <a href="eat.html">Eat</a>
-    <a href="shopping.html">Shopping</a>
-    <a href="review.html">Review</a>
-    <a href="contact.html">Contact</a>
-  </div>
-
-  <!-- Main Content -->
-  <div class="main-content">
-    <!-- Search Bar Section -->
-    <div class="search-bar">
-      <input type="text" placeholder="Search for places, restaurants, attractions...">
-      <button><i class="fas fa-search"></i></button>
+  <section>
+    <div class="content">
+      <h1>Let's Travel The World Together!</h1>
+      <p>
+        Our tours are designed to transport you to the heart of the world's
+        most captivating destinations, creating memories that will last a
+        lifetime.
+      </p>
+      <button>Explore Tours</button>
     </div>
 
-    <!-- Cards Section -->
-    <div class="card-container">
-      <div class="card">
-        <img src="path/to/image1.jpg" alt="Place 1">
-        <div class="card-content">
-          <h3>Place 1</h3>
-          <p>Discover beautiful landscapes and exciting adventures.</p>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">
+          <img src="file:///C:/Users/Asus/Downloads/website/review%20carousel.jpg" alt="Review">
         </div>
-      </div>
-
-      <div class="card">
-        <img src="path/to/image2.jpg" alt="Place 2">
-        <div class="card-content">
-          <h3>Place 2</h3>
-          <p>Explore unique dining experiences and local flavors.</p>
+        <div class="swiper-slide">
+          <img src="file:///C:/Users/Asus/Downloads/website/eat%20carousel.jpg" alt="Eat">
         </div>
-      </div>
-
-      <div class="card">
-        <img src="path/to/image3.jpg" alt="Place 3">
-        <div class="card-content">
-          <h3>Place 3</h3>
-          <p>Relax and unwind at some of the best resorts.</p>
+        <div class="swiper-slide">
+          <img src="file:///C:/Users/Asus/Downloads/website/map%20carousel.jpg" alt="Map">
         </div>
-      </div>
-
-      <div class="card">
-        <img src="path/to/image4.jpg" alt="Place 4">
-        <div class="card-content">
-          <h3>Place 4</h3>
-          <p>Experience local culture and art.</p>
+        <div class="swiper-slide">
+          <img src="file:///C:/Users/Asus/Downloads/website/shop%20carousel.jpg" alt="Shop">
         </div>
-      </div>
-
-      <div class="card">
-        <img src="path/to/image5.jpg" alt="Place 5">
-        <div class="card-content">
-          <h3>Place 5</h3>
-          <p>Adventure-filled activities for thrill-seekers.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="path/to/image6.jpg" alt="Place 6">
-        <div class="card-content">
-          <h3>Place 6</h3>
-          <p>Serene and peaceful retreats for relaxation.</p>
+        <div class="swiper-slide">
+          <img src="file:///C:/Users/Asus/Downloads/website/explore%20carousel.jpg" alt="Explore">
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const closeBtn = document.getElementById('close-btn');
-
-    menuToggle.addEventListener('click', () => sidebar.classList.add('active'));
-    closeBtn.addEventListener('click', () => sidebar.classList.remove('active'));
+    // Swiper configuration to show one slide at a time
+    var swiper = new Swiper(".swiper", {
+      effect: "slide",    // Slide effect
+      loop: true,         // Infinite loop
+      slidesPerView: 1,   // Show one slide at a time
+      spaceBetween: 0,    // No space between slides
+      speed: 1000,        // Transition speed
+      autoplay: {
+        delay: 3000,      // Autoplay delay (3 seconds)
+        disableOnInteraction: false, // Continue autoplay after interaction
+      },
+    });
   </script>
-
 </body>
 </html>
