@@ -74,3 +74,4 @@ updateSlidePosition();
 
 // Set interval for auto-slide every 3 seconds
 setInterval(autoSlide, 3000);
+
