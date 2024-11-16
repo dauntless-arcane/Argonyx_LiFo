@@ -4,6 +4,7 @@ function toggleLoginDropdown() {
   dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 
+// Close dropdown if clicked outside
 document.addEventListener("click", (e) => {
   const loginDropdown = document.getElementById("loginDropdown");
   const isClickInside = e.target.closest(".nav-dropdown");
@@ -35,27 +36,41 @@ function animateOnScroll() {
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
 
-let currentSlide = 0;
+// Carousel functionality
+let currentSlideIndex = 0;
+const slidesContainer = document.querySelector('.slides');
+const slides = document.querySelectorAll('.slide');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
 
-function moveSlide(direction) {
-  const carousel = document.querySelector('.carousel');
-  const slides = document.querySelectorAll('.carousel img');
-  const totalSlides = slides.length;
-
-  const visibleSlides = 3; // Number of images visible at once
-  const maxSlideIndex = Math.ceil(totalSlides / visibleSlides) - 1; // Last group index
-
-  // Update the currentSlide index
-  currentSlide += direction;
-
-  // Wrap around to the beginning or end
-  if (currentSlide < 0) {
-    currentSlide = maxSlideIndex;
-  } else if (currentSlide > maxSlideIndex) {
-    currentSlide = 0;
-  }
-
-  // Calculate the offset for the transform property
-  const offset = -currentSlide * 100; // Each group takes up 100% width
-  carousel.style.transform = `translateX(${offset}%)`;
+// Function to update the position of the slides
+function updateSlidePosition() {
+  const slideWidth = slides[0].offsetWidth; // Get the width of each slide
+  slidesContainer.style.transform = `translateX(-${currentSlideIndex * slideWidth}px)`; // Update the carousel position
 }
+
+// Event listener for the 'prev' button
+prevButton.addEventListener('click', () => {
+  // Move to the previous slide and loop if needed
+  currentSlideIndex = (currentSlideIndex === 0) ? slides.length - 1 : currentSlideIndex - 1;
+  updateSlidePosition();
+});
+
+// Event listener for the 'next' button
+nextButton.addEventListener('click', () => {
+  // Move to the next slide and loop if needed
+  currentSlideIndex = (currentSlideIndex === slides.length - 1) ? 0 : currentSlideIndex + 1;
+  updateSlidePosition();
+});
+
+// Function for automatic sliding
+function autoSlide() {
+  currentSlideIndex = (currentSlideIndex + 1) % slides.length; // Loop back to the first slide when reaching the last
+  updateSlidePosition();
+}
+
+// Initialize the slide position on page load
+updateSlidePosition();
+
+// Set interval for auto-slide every 3 seconds
+setInterval(autoSlide, 3000);
