@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Scroll Effect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creato+Display&display=swap" rel="stylesheet">
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Body Styles */
+    body {
+      background-color: #001e36;
+      color: white;
+      overflow-y: auto;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      padding: 10px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      font-size: 1.1em;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #7f76b9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100%;
+      width: 250px;
+      background-color: transparent;
+      z-index: 999;
+      transition: left 0.3s ease-in-out;
+      padding: 50px 20px;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      display: inline;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar ul li:hover a {
+      opacity: 1;
+    }
+
+    .sidebar ul li img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      z-index: 998;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Background Image */
+    .background-image {
+      background: url('bg.png') center/cover no-repeat,
+                  linear-gradient(to bottom, rgba(0, 0, 0, 0), #001e36);
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 40px;
+      position: relative;
+    }
+
+    .hero-text {
+      font-family: 'Creato Display', sans-serif;
+      font-size: 4em;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: center;
+      font-weight: lighter;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Section */
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+      margin-top: 150px;
+      background-color: #001e36;
+    }
+
+    .section-content {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      max-width: 1200px;
+    }
+
+    .section-image img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+    }
+
+    .section-text {
+      max-width: 500px;
+    }
+
+    .section-text h2 {
+      font-size: 28px;
+      font-family: 'Creato Display', sans-serif;
+      color: #fff;
+    }
+
+    .section-text p {
+      font-size: 16px;
+      color: #ccc;
+      margin: 20px 0;
+    }
+
+    .btn-book {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 16px;
+      color: white;
+      background-color: #4CAF50;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-book:hover {
+      background-color: #45a049;
+    }
+
+    /* Carousel Section */
+    .carousel-container {
+      position: relative;
+      width: 90%;
+      max-width: 1000px;
+      margin: 250px auto;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      gap: 20px;
+    }
+
+    .carousel img {
+      width: 30%;
+      flex-shrink: 0;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+    }
+
+    button.prev {
+      left: 10px;
+    }
+
+    button.next {
+      right: 10px;
+    }
+
+    button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Arrow styling */
+    button.prev::before, button.next::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 15px solid white;
+    }
+
+    button.next::before {
+      border-top: none;
+      border-left: 15px solid white;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      .carousel img {
+        width: 250px;
+        height: 150px;
+      }
+
+      .carousel-container {
+        margin: 50px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo" id="logo">
+      <img src="l1200.jpg" alt="Logo">
+    </div>
+    <div class="nav-links">
+      <a href="../homepage/homepage2.html">Home</a>
+      <a href="../bookings/bookings.html">Trip & Bookings</a>
+      <a href="about.html">About Us</a>
+      <a href="signin.html">Login</a>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <span class="close-btn" id="close-btn">&times;</span>
+    <ul>
+      <li>
+        <a href="explore.html">
+          <img src="images/map.png" alt="Explore" class="sidebar-icon">
+          <span class="text-hover">Explore</span>
+        </a>
+      </li>
+      <li>
+        <a href="eat.html">
+          <img src="images/eating.png" alt="Eat" class="sidebar-icon">
+          <span class="text-hover">Eat</span>
+        </a>
+      </li>
+      <li>
+        <a href="shopping.html">
+          <img src="images/shopping.png" alt="Shopping" class="sidebar-icon">
+          <span class="text-hover">Shopping</span>
+        </a>
+      </li>
+      <li>
+        <a href="review.html">
+          <img src="images/like.png" alt="Review" class="sidebar-icon">
+          <span class="text-hover">Review</span>
+        </a>
+      </li>
+      <li>
+        <a href="contact.html">
+          <img src="images/phone-call.png" alt="Contact" class="sidebar-icon">
+          <span class="text-hover">Contact Us</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Section with Background Image -->
+  <div class="background-image">
+    <div class="hero-text">
+      Discover the World With Us
+    </div>
+  </div>
+
+  <!-- Section with Image and Text -->
+  <div class="section">
+    <div class="section-content">
+      <div class="section-image">
+        <img src="tripimage.jpg" alt="Trip Image">
+      </div>
+      <div class="section-text">
+        <h2>Explore the Best Destinations</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor augue et est egestas, non dictum elit vestibulum.</p>
+        <a href="#" class="btn-book">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Section -->
+  <!-- Carousel Section (Moved here after the section) -->
+  <div class="carousel-container">
+    <div class="carousel">
+        <img src="bglr.png" alt="Bangalore">
+        <img src="chennai.png" alt="Chennai">
+        <img src="delhi.png" alt="Delhi">
+        <img src="goa.png" alt="Goa">
+        <img src="mumbai.png" alt="Mumbai">
+        <img src="punjab.png" alt="Punjab">
+        
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">Prev</button>
+  <button class="next" onclick="moveSlide(1)">Next</button>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('close-btn');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    // Carousel Controls
+    const carousel = document.querySelector('.carousel');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    let index = 0;
+
+    prevButton.addEventListener('click', () => {
+      index = (index > 0) ? index - 1 : 2;
+      updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+      index = (index < 2) ? index + 1 : 0;
+      updateCarousel();
+    });
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${index * 33.33}%)`;
+    }
+  </script>
+</body>
+</html>
