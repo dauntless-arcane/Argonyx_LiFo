@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Scroll Effect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creato+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">
+      <img src="l1200.jpg" alt="Logo"> <!-- Corrected path -->
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="../bookings/bookings.html" class="nav-link">Trip & Bookings</a>
+      <a href="about.html" class="nav-link">About Us</a>
+      <a href="../signin/signin.html" class="nav-link">Login</a>
+    </div>
+  </div>
+
+  <!-- Background Image with Fade -->
+  <div class="background-image">
+    <p class="hero-text">Explore the Unknown</p>
+  </div>
+
+  <!-- New Section with Image on Left and Text on Right -->
+  <div class="section">
+    <div class="section-content">
+      <div class="section-image">
+        <img src="s-l1200.jpg" alt="Travel Image"> <!-- Use relative path here -->
+      </div>
+      <div class="section-text">
+        <h2>Make Your Trip Unforgettable</h2>
+        <p>To book your journey to amazing destinations, get in touch with us today! We’re here to help you explore, relax, and enjoy the experience of a lifetime.</p>
+        <a href="../bookings/bookings.html" class="btn-book">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Section (Moved here after the section) -->
+  <div class="carousel-container">
+    <div class="carousel">
+        <img src="bglr.png" alt="Bangalore">
+        <img src="chennai.png" alt="Chennai">
+        <img src="delhi.png" alt="Delhi">
+        <img src="goa.png" alt="Goa">
+        <img src="mumbai.png" alt="Mumbai">
+        <img src="punjab.png" alt="Punjab">
+        
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">Prev</button>
+  <button class="next" onclick="moveSlide(1)">Next</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <p></p>
+    <div style="height: 2000px;"></div>
+  </div>
+  <footer>
+    <div class="footer-content">
+      <p>© 2024 Your Website</p>
+    </div>
+  </footer>
+  <script src="script.js"></script> <!-- Link to the JavaScript file -->
+</body>
+</html>
