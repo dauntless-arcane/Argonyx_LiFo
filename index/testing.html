@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Scroll Effect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creato+Display&display=swap" rel="stylesheet">
+  
+  <style>
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+body {
+  background-color: #001e36;
+  color: white;
+  overflow-y: auto;
+  height: 40%;  /* Remove 100% height and let the content decide */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent; /* Colorless navbar */
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  font-size: 1.1em;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #7f76b9;
+}
+
+/* Background Image with Fading */
+.background-image {
+  position: relative;
+  background-image: url('bg.png'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+/* Main hero text */
+.hero-text {
+  font-size: 3rem;
+  font-family: 'Creato Display', sans-serif;
+  font-weight: bold;
+  margin: 100px;
+}
+
+/* Subtext below the hero text */
+.subtext {
+  font-size: 1.5rem;
+  font-family: 'Creato Display', sans-serif;
+  font-weight: normal;
+  margin-top: -100px;
+}
+
+/* Main Content Styles */
+.content {
+  background-color: #001e36;
+  color: white;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Smooth Scrolling */
+html, body {
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7f76b9;
+  border-radius: 10px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7f76b9;
+}
+
+/* Carousel Container */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1250px;
+  margin: 10px auto; /* Reduced margin for better alignment */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px; /* Spacing between images */
+}
+
+.carousel img {
+  width: 30%; /* Adjusted for spacing */
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 10px; /* Rounded corners for images */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+/* Removed Arrow Buttons */
+button {
+  display: none; /* Hide arrow buttons */
+}
+
+/* Style for the carousel container */
+/* Container for the slides */
+.slides-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* You can adjust this value */
+  margin: auto;
+  overflow: hidden;
+  margin-top: -30px; /* Negative margin to shift the slides up */
+
+}
+
+/* Container that holds the individual slides */
+.slides {
+  display: flex;
+  transition: transform 1s ease-in-out; /* Smooth transition */
+  will-change: transform;
+}
+
+/* Individual slide styles */
+.slide {
+  min-width: 100%; /* Each image takes up the entire width of the container */
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Navigation buttons */
+button.prev, button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 30px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+button.prev {
+  left: 10px;
+}
+
+button.next {
+  right: 10px;
+}
+
+/* Button hover effect */
+button.prev:hover, button.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Optional: to hide the buttons on smaller screens */
+@media (max-width: 600px) {
+  button.prev, button.next {
+    font-size: 20px;
+  }
+}
+
+  .carousel-container {
+    margin: 50px auto; /* Adjusted margin for smaller screens */
+  }
+
+
+  footer {
+    background-color: #001e36;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px; /* Increase this value to move the footer down */
+  }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        p,
+        a {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #001e36;
+        }
+
+        .slider {
+            position: absolute;
+            top: 15vh;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            perspective: 300px;
+            perspective-origin: 50% 50%;
+        }
+
+        .card {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            width: 50%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translate3d(-50%, -50%, 0);
+            background-color: #000;
+        }
+
+        @media(max-width: 500px) {
+            .slider {
+                top: 27vh;
+            }
+
+            .card {
+                height: 300px;
+            }
+        }
+
+        .card img {
+            position: absolute;
+            opacity: 0.75;
+        }
+
+        .copy {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        h1 {
+            position: relative;
+            text-align: center;
+            font-size: 6vw;
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            color: #dfe1c8;
+        }
+
+        h1 span {
+            position: relative;
+            display: inline-block;
+        }
+        .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      padding: 10px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      font-size: 1.1em;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #7f76b9;
+    }
+
+    /* User Icon with Image */
+    .user-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .user-image:hover {
+      transform: scale(1.1);
+      filter: brightness(1.2);
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    #user-icon {
+      font-size: 1.5em;
+      cursor: pointer;
+      color: white;
+      transition: color 0.3s;
+    }
+
+    #user-icon:hover {
+      color: #7f76b9;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #333;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      min-width: 160px;
+      z-index: 100;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 1.1em;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100%;
+      width: 250px;
+      background-color: transparent;
+      z-index: 999;
+      transition: left 0.3s ease-in-out;
+      padding: 80px 20px 20px 20px;
+    }
+
+    .sidebar ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      display: inline;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar ul li:hover a {
+      opacity: 1;
+    }
+
+    .sidebar ul li .text-hover {
+      display: none;
+      margin-left: 10px;
+    }
+
+    .sidebar ul li:hover .text-hover {
+      display: inline;
+    }
+
+    .sidebar ul li img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      z-index: 998;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo" id="logo">
+          <img src="l1200.jpg" alt="Logo">
+        </div>
+        <div class="nav-links">
+          <a href="../homepage/homepage2.html">Home</a>
+          <a href="../bookings/bookings.html">Trip & Bookings</a>
+          <a href="about.html">About Us</a>
+    
+          <div class="dropdown">
+            <img src="profile.png" alt="User" id="user-icon" class="user-image">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="profile.html">View Profile</a>
+              <a href="../index/index.html">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+  <!-- Background Image with Fade -->
+  <!-- Background Image with Fade -->
+<div class="background-image">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <p class="hero-text">Explore the Exotic</p>
+  <p class="subtext">Escape. Explore. See.</p> <!-- Added subtext here -->
+
+  
+<div class="slides-container">
+  <div class="slides">
+    <div class="slide"><img src="explore.png" alt="Explore new places"></div>
+    <div class="slide"><img src="eat.png" alt="Find new dine-in options"></div>
+    <div class="slide"><img src="map.png" alt="Book events near you"></div>
+    <div class="slide"><img src="review.png" alt="Shop for authentic goods"></div>
+    <div class="slide"><img src="review.png" alt="Customize your trips"></div>
+  </div>
+  <button class="prev">←</button>
+  <button class="next">→</button>
+</div>
+</div>
+
+
+  <div class="container">
+      <div class="slider">
+          <div class="card">
+              <img src="https://images.unsplash.com/photo-1689602037070-fec2eca3f5b2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+              <div class="copy">
+                  <h1>Lorem, ipsum.</h1>
+              </div>
+          </div>
+          <div class="card">
+              <img src="https://images.unsplash.com/photo-1718125188885-7ce699512931?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+              <div class="copy">
+                  <h1>Lorem , ipsum.</h1>
+              </div>
+          </div>
+          <div class="card">
+              <img src="https://images.unsplash.com/photo-1718116088537-212b192d1ad9?q=80&w=2075&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+              <div class="copy">
+                  <h1>Lorem, ipsum.</h1>
+              </div>
+          </div>
+          <div class="card">
+              <img src="https://images.unsplash.com/photo-1718194822494-47de8fb7922c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+              <div class="copy">
+                  <h1>Lorem, ipsum.</h1>
+              </div>
+          </div>
+          <div class="card">
+              <img src="https://images.unsplash.com/photo-1713970700051-556d05c59fce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+              <div class="copy">
+                  <h1>Lorem, ipsum.</h1>
+              </div>
+          </div>
+      </div>
+  </div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <span class="close-btn" id="close-btn">&times;</span>
+    <ul>
+      <li>
+        <a href="../homepage/explore/explore.html">
+          <img src="../homepage/map.png" class="sidebar-icon">
+          <span class="text-hover">Explore</span>
+        </a>
+      </li>
+      <li>
+        <a href="../homepage/food/food.html">
+          <img src="../homepage/eating.png" class="sidebar-icon">
+          <span class="text-hover">Eat</span>
+        </a>
+      </li>
+      <li>
+        <a href="shopping.html">
+          <img src="../homepage/shopping.png" class="sidebar-icon">
+          <span class="text-hover">Shopping</span>
+        </a>
+      </li>
+      <li>
+        <a href="events.html">
+          <img src="../homepage/event.png" class="sidebar-icon">
+          <span class="text-hover">Events</span>
+        </a>
+      </li>
+      <li>
+        <a href="events.html">
+          <img src="../homepage/event.png" class="sidebar-icon">
+          <span class="text-hover">Reviews</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <button class="prev" onclick="moveSlide(-1)">Prev</button>
+<button class="next" onclick="moveSlide(1)">Next</button>
+</div>
+  <footer>
+    <div class="footer-content">
+      <p>© 2024 Your Website</p>
+    </div>
+  </footer>
+  <body>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <span class="close-btn" id="close-btn">&times;</span>
+        <ul>
+            <!-- Sidebar content -->
+        </ul>
+    </div>
+    <!-- Other content -->
+</body>
+  <script src="script.js"></script> <!-- Link to the JavaScript file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/CustomEase.min.js"></script>
+    <script>
+      CustomEase.create("cubic", "0.83, 0, 0.17, 1");
+  
+      let isAnimating = false;
+  
+      function splitTextIntoSpans(selector) {
+          let elements = document.querySelectorAll(selector);
+          elements.forEach(element => {
+              let text = element.innerText;
+              let splitText = text
+                  .split("")
+                  .map(char => `<span>${char === " " ? "&nbsp;&nbsp;" : char}</span>`)
+                  .join("");
+              element.innerHTML = splitText;
+          });
+      }
+  
+      function initializeCards() {
+          let cards = Array.from(document.querySelectorAll(".card"));
+          gsap.to(cards, {
+              y: (i) => -15 + 15 * i + "%",
+              z: (i) => 15 * i,
+              duration: 1,
+              ease: "cubic",
+              stagger: -0.1
+          });
+      }
+  
+      document.addEventListener("DOMContentLoaded", () => {
+          splitTextIntoSpans(".copy h1");
+          initializeCards();
+          gsap.set("h1 span", { y: -200 });
+          gsap.set(".slider .card:last-child h1 span", { y: 0 });
+      });
+  
+      document.addEventListener("click", () => {
+          if (isAnimating) return;
+          isAnimating = true;
+  
+          let slider = document.querySelector(".slider");
+          let cards = Array.from(slider.querySelectorAll(".card"));
+          let lastCard = cards.pop(); // Remove the last card
+          let nextCard = cards[cards.length - 1]; // Get the new last card
+  
+          // Animate the last card
+          gsap.to(lastCard.querySelectorAll("h1 span"), {
+              y: 200,
+              duration: 0.75,
+              ease: "cubic"
+          });
+  
+          gsap.to(lastCard, {
+              y: "+=150%", // Move the last card down
+              duration: 0.75,
+              ease: "cubic",
+              onComplete: () => {
+                  slider.prepend(lastCard); // Move the last card to the top
+                  initializeCards(); // Reposition all cards
+                  gsap.set(lastCard.querySelectorAll("h1 span"), { y: -200 });
+                  setTimeout(() => {
+                      isAnimating = false;
+                  }, 1000);
+              }
+          });
+  
+          // Animate the next card's text
+          gsap.to(nextCard.querySelectorAll("h1 span"), {
+              y: 0,
+              duration: 1,
+              ease: "cubic",
+              stagger: 0.05
+          });
+      });
+
+      // Sidebar Toggle
+    document.getElementById('logo').onclick = function(event) {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+      overlay.classList.toggle('active');
+      event.stopPropagation();
+    };
+
+    document.getElementById('close-btn').onclick = function(event) {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = '-250px';
+      overlay.classList.remove('active');
+      event.stopPropagation();
+    };
+
+    document.body.onclick = function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = '-250px';
+      overlay.classList.remove('active');
+    };
+
+    document.getElementById('sidebar').onclick = function(event) {
+      event.stopPropagation();
+    };
+
+    // Dropdown Toggle
+    document.getElementById('user-icon').onclick = function() {
+      const dropdown = document.getElementById('dropdown-content');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    };
+
+
+
+   
+  // Get the elements
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.overlay');
+  const closeBtn = document.querySelector('.sidebar .close-btn');
+  const logo = document.getElementById('logo'); // If logo is your button to toggle sidebar
+  
+  // Toggle the sidebar visibility
+  logo.addEventListener('click', () => {
+    sidebar.style.left = '0'; // Slide the sidebar in
+    overlay.classList.add('active'); // Show the overlay
+  });
+
+  // Close the sidebar
+  closeBtn.addEventListener('click', () => {
+    sidebar.style.left = '-250px'; // Slide the sidebar out
+    overlay.classList.remove('active'); // Hide the overlay
+  });
+
+  // Close sidebar if overlay is clicked
+  overlay.addEventListener('click', () => {
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+  });
+
+  // Sidebar Toggle
+document.getElementById('logo').onclick = function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+    overlay.classList.toggle('active');
+    event.stopPropagation();
+};
+
+// Close the sidebar
+document.getElementById('close-btn').onclick = function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+    event.stopPropagation();
+};
+
+// Close sidebar if overlay is clicked
+overlay.addEventListener('click', () => {
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+});
+</script>
+
+ 
+
+  
+</body>
+</html>
