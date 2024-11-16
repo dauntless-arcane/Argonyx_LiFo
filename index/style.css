@@ -152,57 +152,72 @@ button {
 }
 
 /* Style for the carousel container */
+/* Container for the slides */
+.slides-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* You can adjust this value */
+  margin: auto;
+  overflow: hidden;
+}
+
+/* Container that holds the individual slides */
 .slides {
   display: flex;
-  transition: transform 0.5s ease-in-out;
-  position: relative;
-  margin-top: 50px; /* Shift the carousel down */
+  transition: transform 1s ease-in-out; /* Smooth transition */
+  will-change: transform;
 }
 
-/* Style for individual slides */
+/* Individual slide styles */
 .slide {
-  width: 250px; /* Decrease the width of each slide */
-  height: 120px; /* Decrease the height of each slide */
-  margin: 0 10px; /* Reduce the space between slides */
-  object-fit: cover; /* Ensure images fill the slide area */
-}
-
-/* Style for the carousel container */
-.carousel {
-  overflow: hidden;
-  width: 100%; /* Adjust as needed */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px; /* Adjust the height of the carousel container */
-}
-
-/* Style for the slides */
-.slide {
-  min-width: 100%; /* Each slide takes up 100% of the container width */
-  height: 200px; /* Adjust height if needed */
-  margin: 0; /* Remove space between slides */
+  min-width: 100%; /* Each image takes up the entire width of the container */
   box-sizing: border-box;
-  padding: 20px;
-  text-align: center;
-  background-color: #333;
-  color: white;
-  font-size: 24px;
-  display: block; /* Ensure slides are block elements */
-  object-fit: cover; /* Ensure content is scaled properly */
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
-  .carousel img {
-    width: 250px; /* Adjusted for smaller screens */
-    height: 150px;
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Navigation buttons */
+button.prev, button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 30px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+button.prev {
+  left: 10px;
+}
+
+button.next {
+  right: 10px;
+}
+
+/* Button hover effect */
+button.prev:hover, button.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Optional: to hide the buttons on smaller screens */
+@media (max-width: 600px) {
+  button.prev, button.next {
+    font-size: 20px;
   }
+}
 
   .carousel-container {
     margin: 50px auto; /* Adjusted margin for smaller screens */
   }
-}
+
 
 footer {
   background-color: #001e36;
