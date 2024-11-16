@@ -246,7 +246,7 @@ button.prev:hover, button.next:hover {
         a {
             text-decoration: none;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 7px;
             color: #000;
         }
 
@@ -307,7 +307,7 @@ button.prev:hover, button.next:hover {
         h1 {
             position: relative;
             text-align: center;
-            font-size: 6vw;
+            font-size: 4vw;
             font-weight: 300;
             letter-spacing: -0.05em;
             text-transform: uppercase;
