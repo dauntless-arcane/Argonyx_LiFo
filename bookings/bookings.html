@@ -13,12 +13,19 @@
       font-family: Arial, sans-serif;
     }
 
+    /* Apply background image to the entire body */
+    body {
+      background: url('booking_page.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+    }
+
     /* Navbar Styles */
     .navbar {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background-color: #333;
+      background-color: rgba(18, 18, 18, 0.85); /* Dark background with transparency */
       padding: 15px;
       position: fixed;
       width: 100%;
@@ -75,16 +82,6 @@
       color: white;
     }
 
-    /* Background Image */
-    .background-image {
-      height: 100vh;
-      background: url('https://plus.unsplash.com/premium_photo-1701534008693-0eee0632d47a?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 80px;
-    }
-
     /* Faded Box */
     .faded-box {
       background-color: rgba(255, 255, 255, 0.8);
@@ -104,7 +101,7 @@
       max-width: 500px;
       margin: 100px auto;
       padding: 20px;
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0); /* White with slight transparency */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
     }
@@ -141,15 +138,15 @@
 <body>
   <header>
     <nav class="navbar">
-      <a href="homepage2.html" class="nav-link">Home</a>
+      <a href="../homepage/homepage2.html" class="nav-link">Home</a>
       <a href="bookings.html" class="nav-link button-link">Bookings</a>
-      <a href="signin.html" class="nav-link">Login</a>
+      <a href="../signin/signin.html" class="nav-link">Login</a>
     </nav>
   </header>
   <main>
     <div class="form-container">
       <h2>Book Your Travel</h2>
-      <form>
+      <form action="Explore.html" method="get">
         <input type="text" placeholder="Name" required>
         <input type="number" placeholder="Age" required>
         <input type="date" placeholder="Start Date" required>
@@ -160,8 +157,8 @@
           <option value="mumbai">Mumbai</option>
           <option value="goa">Goa</option>
         </select>
-        <button type="submit">Submit</button>
-      </form>
+        <button type="submit"><h3>Explore</h3></button>
+      </>
     </div>
   </main>
 </body>
