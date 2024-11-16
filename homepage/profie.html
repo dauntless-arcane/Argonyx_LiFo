@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creato+Display&display=swap" rel="stylesheet">
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #001e36;
+      color: white;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      padding: 10px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      font-size: 1.1em;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #7f76b9;
+    }
+
+    /* Profile Section */
+    .profile-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+      padding: 20px;
+    }
+
+    .profile-box {
+      background-color: #222;
+      width: 500px;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .profile-header h2 {
+      font-family: 'Creato Display', sans-serif;
+      font-size: 2em;
+      color: white;
+    }
+
+    .profile-details {
+      font-size: 1.2em;
+      color: #ddd;
+    }
+
+    .profile-details p {
+      margin-bottom: 10px;
+    }
+
+    .profile-details span {
+      font-weight: bold;
+      color: #7f76b9;
+    }
+
+    /* Edit Button */
+    .edit-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #7f76b9;
+      color: white;
+      text-align: center;
+      font-size: 1.2em;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .edit-btn:hover {
+      background-color: #5e4d94;
+    }
+
+    .back-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      font-size: 1.2em;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .back-btn:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <img src="l1200.jpg" alt="Logo">
+    </div>
+    <div class="nav-links">
+      <a href="../homepage/homepage2.html">Home</a>
+      <a href="../bookings/bookings.html">Trip & Bookings</a>
+      <a href="about.html">About Us</a>
+    </div>
+  </div>
+
+  <!-- Profile Page Content -->
+  <div class="profile-container">
+    <div class="profile-box">
+      <div class="profile-header">
+        <img src="profile.png" alt="Profile Picture">
+        <h2>John Doe</h2>
+      </div>
+      <div class="profile-details">
+        <p><span>Name:</span> John Doe</p>
+        <p><span>Email:</span> john.doe@example.com</p>
+        <p><span>Phone:</span> +1234567890</p>
+        <p><span>Address:</span> 1234 Elm Street, City, Country</p>
+        <p><span>Joined:</span> January 2023</p>
+      </div>
+      <button class="edit-btn">Edit Profile</button>
+      <button class="back-btn" onclick="window.location.href='homepage2.html'">Back to Home</button>
+    </div>
+  </div>
+
+  <script>
+    // Add interactivity here if needed
+  </script>
+</body>
+</html>
