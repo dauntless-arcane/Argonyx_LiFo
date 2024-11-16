@@ -14,7 +14,6 @@ body {
   height: 40%;  /* Remove 100% height and let the content decide */
 }
 
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -53,24 +52,33 @@ body {
 
 /* Background Image with Fading */
 .background-image {
-  background: url('bg.png') center/cover no-repeat,
-              linear-gradient(to bottom, rgba(0, 0, 0, 0), #001e36);
-  height: 90vh;
-  color: white;
+  position: relative;
+  background-image: url('bg.png'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 40px;
-  position: relative;
+  text-align: center;
+  color: white;
 }
 
+/* Main hero text */
 .hero-text {
+  font-size: 3rem;
   font-family: 'Creato Display', sans-serif;
-  font-size: 4em;
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-  font-weight: lighter;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Subtext below the hero text */
+.subtext {
+  font-size: 1.5rem;
+  font-family: 'Creato Display', sans-serif;
+  font-weight: normal;
+  margin-top: 10px;
 }
 
 /* Main Content Styles */
@@ -108,64 +116,7 @@ html, body {
   background-color: #7f76b9;
 }
 
-/* Section Styles */
-.section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 50px 20px;
-  margin-top: 150px;
-  background-color: #001e36;
-}
-
-.section-content {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  max-width: 1200px;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.section-image img {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 10px;
-}
-
-.section-text {
-  max-width: 500px;
-}
-
-.section-text h2 {
-  font-size: 28px;
-  font-family: 'Creato Display', sans-serif;
-  color: #fff;
-}
-
-.section-text p {
-  font-size: 16px;
-  color: #ccc;
-  margin: 20px 0;
-}
-
-.btn-book {
-  display: inline-block;
-  padding: 12px 24px;
-  font-size: 16px;
-  color: white;
-  background-color: #4CAF50;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
-
-.btn-book:hover {
-  background-color: #45a049;
-}
-
-
+/* Carousel Container */
 .carousel-container {
   position: relative;
   width: 90%;
@@ -195,65 +146,81 @@ html, body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
 }
 
+/* Removed Arrow Buttons */
 button {
+  display: none; /* Hide arrow buttons */
+}
+
+/* Style for the carousel container */
+/* Container for the slides */
+.slides-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* You can adjust this value */
+  margin: auto;
+  overflow: hidden;
+  margin-top: -30px; /* Negative margin to shift the slides up */
+
+}
+
+/* Container that holds the individual slides */
+.slides {
+  display: flex;
+  transition: transform 1s ease-in-out; /* Smooth transition */
+  will-change: transform;
+}
+
+/* Individual slide styles */
+.slide {
+  min-width: 100%; /* Each image takes up the entire width of the container */
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Navigation buttons */
+button.prev, button.next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
+  font-size: 30px;
   padding: 10px;
   cursor: pointer;
   z-index: 10;
-  border-radius: 50%; /* Round button shape */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-}
-
-/* Arrow styling */
-button.prev::before, button.next::before {
-  content: '';
-  display: block;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 15px solid white; /* For rightward arrow */
 }
 
 button.prev {
   left: 10px;
 }
 
-/* Reverse the direction of the next arrow (pointing right) */
 button.next {
   right: 10px;
 }
 
-button.next::before {
-  border-top: none;
-  border-left: 15px solid white; /* For leftward arrow */
-}
-
-/* Hover effect */
-button:hover {
+/* Button hover effect */
+button.prev:hover, button.next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
-  .carousel img {
-    width: 250px; /* Adjusted for smaller screens */
-    height: 150px;
+/* Optional: to hide the buttons on smaller screens */
+@media (max-width: 600px) {
+  button.prev, button.next {
+    font-size: 20px;
   }
+}
 
   .carousel-container {
     margin: 50px auto; /* Adjusted margin for smaller screens */
   }
-}
+
+
 footer {
   background-color: #001e36;
   color: white;
@@ -261,3 +228,81 @@ footer {
   padding: 10px;
   margin-top: 20px;
 }
+
+/* General styling for the explore section */
+.explore-section {
+  width: 100%;
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #001e36; /* Updated background color to match the website's background */
+}
+
+.explore-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 90%;
+  margin: 10px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.explore-item img {
+  width: 50%; /* Adjust width for image */
+  height: auto;
+  border-radius: 10px;
+}
+
+.text-content {
+  width: 45%; /* Adjust width for text */
+  padding: 20px;
+}
+
+.text-content h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.text-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.explore-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #7f76b9;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+  background-color: #6b67a7;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .explore-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .explore-item img {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .text-content {
+    width: 80%;
+  }
+}
+
