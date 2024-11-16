@@ -1,0 +1,263 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+body {
+  background-color: #001e36;
+  color: white;
+  overflow-y: auto;
+  height: 40%;  /* Remove 100% height and let the content decide */
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent; /* Colorless navbar */
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  font-size: 1.1em;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #7f76b9;
+}
+
+/* Background Image with Fading */
+.background-image {
+  background: url('bg.png') center/cover no-repeat,
+              linear-gradient(to bottom, rgba(0, 0, 0, 0), #001e36);
+  height: 90vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  position: relative;
+}
+
+.hero-text {
+  font-family: 'Creato Display', sans-serif;
+  font-size: 4em;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-weight: lighter;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Main Content Styles */
+.content {
+  background-color: #001e36;
+  color: white;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Smooth Scrolling */
+html, body {
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7f76b9;
+  border-radius: 10px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7f76b9;
+}
+
+/* Section Styles */
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  margin-top: 150px;
+  background-color: #001e36;
+}
+
+.section-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section-image img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.section-text {
+  max-width: 500px;
+}
+
+.section-text h2 {
+  font-size: 28px;
+  font-family: 'Creato Display', sans-serif;
+  color: #fff;
+}
+
+.section-text p {
+  font-size: 16px;
+  color: #ccc;
+  margin: 20px 0;
+}
+
+.btn-book {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  color: white;
+  background-color: #4CAF50;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.btn-book:hover {
+  background-color: #45a049;
+}
+
+
+.carousel-container {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  margin: 250px auto; /* Reduced margin for better alignment */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px; /* Spacing between images */
+}
+
+.carousel img {
+  width: 30%; /* Adjusted for spacing */
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 10px; /* Rounded corners for images */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%; /* Round button shape */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+/* Arrow styling */
+button.prev::before, button.next::before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid white; /* For rightward arrow */
+}
+
+button.prev {
+  left: 10px;
+}
+
+/* Reverse the direction of the next arrow (pointing right) */
+button.next {
+  right: 10px;
+}
+
+button.next::before {
+  border-top: none;
+  border-left: 15px solid white; /* For leftward arrow */
+}
+
+/* Hover effect */
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .carousel img {
+    width: 250px; /* Adjusted for smaller screens */
+    height: 150px;
+  }
+
+  .carousel-container {
+    margin: 50px auto; /* Adjusted margin for smaller screens */
+  }
+}
+footer {
+  background-color: #001e36;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
