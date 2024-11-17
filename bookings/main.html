@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookings</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Apply background image to the entire body */
+    body {
+      background: url('booking_page.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: rgba(18, 18, 18, 0.85); /* Dark background with transparency */
+      padding: 15px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    .button-link {
+      background-color: #f1c40f;
+      padding: 8px 16px;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .button-link:hover,
+    .nav-link:hover {
+      background-color: #333;
+      color: #f1c40f;
+    }
+
+    /* Form Container Styles */
+    .form-container {
+      max-width: 1000px;
+      margin: 100px auto;
+      padding: 60px;
+      background-color: rgba(255, 255, 255, 0.8); /* White with slight transparency */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center; /* Center text inside the container */
+    }
+
+    /* Button Container Styles */
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .button-container button {
+      flex-basis: 18%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button-container button:hover {
+      background-color: #f1c40f;
+    }
+
+    /* Block Container Styles */
+    .block-container {
+      display: none; /* Hide block container by default */
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .block-container.active {
+      display: block; /* Show block container when active */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="../homepage/homepage2.html" class="nav-link">Home</a>
+      <a href="bookings.html" class="nav-link button-link">Bookings</a>
+      <a href="../signin/signin.html" class="nav-link">Login</a>
+    </nav>
+  </header>
+  
+  <main>
+    <div class="form-container">
+      <h2>Book Your Travel</h2><br>
+      <div class="button-container">
+        <button onclick="showBlock('flights')">Flights</button>
+        <button onclick="showBlock('hotels')">Hotels</button>
+        <button onclick="showBlock('trains')">Trains</button>
+        <button onclick="showBlock('buses')">Buses</button>
+        <button onclick="showBlock('packages')">Packages</button><br>
+      </div>
+      <div id="flights" class="block-container active">
+        <h3>Flight Booking</h3>
+        <p>Book your flights with us at the best prices!</p>
+      </div>
+      <div id="hotels" class="block-container ">
+        <h3>Hotel Booking</h3>
+        <p>Find and book the best hotels for your stay!</p>
+      </div>
+      <div id="trains" class="block-container">
+        <h3>Train Booking</h3>
+        <p>Find and book the fastest trains</p>
+      </div>
+      <div id="buses" class="block-container">
+        <h3>Bus Booking</h3>
+        <p>Find and book the most econimic bus</p>
+      </div>
+      <div id="packages" class="block-container">
+        <h3>Packages</h3>
+        <p>Find and choose the best packages</p>
+      </div>
+    </div>
+  </main>
+   <script>
+    // Function to show a specific block and hide others
+    function showBlock(blockId) {
+      const blocks = document.querySelectorAll('.block-container');
+      blocks.forEach((block) => {
+        block.classList.remove('active'); // Hide all blocks
+      });
+
+      const activeBlock = document.getElementById(blockId);
+      if (activeBlock) {
+        activeBlock.classList.add('active'); // Show the selected block
+      }
+    }
+  </script>
+</body>
+</html>
