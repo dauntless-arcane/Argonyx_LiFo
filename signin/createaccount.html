@@ -96,7 +96,7 @@
 <body>
   <div class="form-container">
     <h2>Create Account</h2>
-    <form id="createAccountForm">
+    <form id="createAccountForm" action="insert.php" method="POST">
       <!-- Step 1: Account Information -->
       <div id="step1" class="form-step active">
         <div class="form-group">
@@ -142,7 +142,7 @@
             <option value="UK">UK</option>
           </select>
         </div>
-        <button type="button" class="btn" onclick="createAccount()">Create Account</button>
+        <button type="submit">Create Account</button>
       </div>
     </form>
   </div>
@@ -163,9 +163,7 @@
     }
 
     // Create account and redirect to homepage2.html
-    function createAccount() {
-      window.location.href = '../homepage/homepage2.html'; // Redirect to homepage
-    }
+    
   </script>
 </body>
 </html>
