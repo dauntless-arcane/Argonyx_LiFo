@@ -23,34 +23,192 @@
     /* Navbar Styles */
     .navbar {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
-      background-color: rgba(18, 18, 18, 0.85); /* Dark background with transparency */
-      padding: 15px;
+      background: transparent;
+      padding: 10px 20px;
       position: fixed;
-      width: 100%;
+      width: 95%;
       top: 0;
       z-index: 1000;
+      box-sizing: border-box;
     }
 
-    .nav-link {
+    .logo img {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px;
+      padding: 7px 12px;
+      font-size: 1.1em;
+      transition: color 0.3s, background-color 0.3s;
     }
 
-    .button-link {
-      background-color: #f1c40f;
-      padding: 8px 16px;
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #7f76b9;
+    }
+    .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .user-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+  /* Dropdown Menu */
+ /* Dropdown Menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+  padding: 0;
+  animation: dropdownAnimation 0.3s ease-out; /* Add smooth animation */
+}
+
+/* Animation for dropdown */
+@keyframes dropdownAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dropdown List Items */
+.dropdown-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-content ul li {
+  padding: 12px 16px; /* Spacing for each item */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Divider between items */
+}
+
+.dropdown-content ul li:last-child {
+  border-bottom: none; /* Remove the border for the last item */
+}
+
+.dropdown-content ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  font-size: 1em;
+}
+
+.dropdown-content ul li:hover {
+  background-color: #555; /* Highlight on hover */
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+  /* Show dropdown on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+    /* Sidebar Styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100%;
+      width: 250px;
+      background-color: transparent;
+      z-index: 999;
+      transition: left 0.3s ease-in-out;
+      padding: 80px 20px 20px 20px;
+      box-sizing: border-box;
+    }
+
+    .sidebar ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar ul li a {
       color: white;
-      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1.2em;
+      display: inline;
+      opacity: 0.7;
+      transition: opacity 0.3s;
     }
 
-    .button-link:hover,
-    .nav-link:hover {
-      background-color: #333;
-      color: #f1c40f;
+    .sidebar ul li:hover a {
+      opacity: 1;
+    }
+
+    .sidebar ul li .text-hover {
+      display: none;
+      margin-left: 10px;
+    }
+
+    .sidebar ul li:hover .text-hover {
+      display: inline;
+    }
+
+    .sidebar ul li img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      z-index: 998;
+    }
+
+    .overlay.active {
+      display: block;
     }
 
     /* Dropdown Styles */
@@ -99,7 +257,7 @@
     /* Form Styles */
     .form-container {
       max-width: 500px;
-      margin: 100px auto;
+      margin: 150px auto;
       padding: 20px;
       background-color: rgba(255, 255, 255, 0); /* White with slight transparency */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -137,11 +295,61 @@
 </head>
 <body>
   <header>
-    <nav class="navbar">
-      <a href="../homepage/homepage2.html" class="nav-link">Home</a>
-      <a href="bookings.html" class="nav-link button-link">Bookings</a>
-      <a href="../signin/signin.html" class="nav-link">Login</a>
-    </nav>
+    <div class="navbar">
+        <div class="logo" id="logo">
+          <img src="l1200.jpg" alt="Logo">
+        </div>
+        <div class="nav-links">
+          <a href="../index/testing.html">Home</a>
+          <a href="../bookings/bookings.html">Trip & Bookings</a>
+          <a href="about.html">About Us</a>
+    
+          <div class="dropdown">
+            <img src="../profile.png" alt="User" id="user-icon" class="user-image">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="profile.html">View Profile</a>
+              <a href="../index/index.html">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Sidebar -->
+      <div class="sidebar" id="sidebar">
+        <span class="close-btn" id="close-btn">&times;</span>
+        <ul>
+          <li>
+            <a href="../explore/explore.html">
+              <img src="../index/map.png" class="sidebar-icon">
+              <span class="text-hover">Explore</span>
+            </a>
+          </li>
+          <li>
+            <a href="../homepage/food/food.html">
+              <img src="../index/eating.png" class="sidebar-icon">
+              <span class="text-hover">Eat</span>
+            </a>
+          </li>
+          <li>
+            <a href="shopping.html">
+              <img src="../index/shopping.png" class="sidebar-icon">
+              <span class="text-hover">Shopping</span>
+            </a>
+          </li>
+          <li>
+            <a href="events.html">
+              <img src="../index/event.png" class="sidebar-icon">
+              <span class="text-hover">Events</span>
+            </a>
+          </li>
+          <li>
+            <a href="../homepage/review page/review.html">
+              <img src="../index/like.png" class="sidebar-icon">
+              <span class="text-hover">Reviews</span>
+            </a>
+          </li>
+        </ul>
+      </div>
   </header>
   <main>
     <div class="form-container">
@@ -160,6 +368,100 @@
         <button type="submit"><h3>Booking Details</h3></button>
       </>
     </div>
+    <div class="overlay" id="overlay"></div>
+
   </main>
+
+  <script>// Sidebar Toggle
+    document.getElementById('logo').onclick = function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+    overlay.classList.toggle('active');
+    event.stopPropagation();
+  };
+
+  document.getElementById('close-btn').onclick = function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+    event.stopPropagation();
+  };
+
+  document.body.onclick = function() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+  };
+
+  document.getElementById('sidebar').onclick = function(event) {
+    event.stopPropagation();
+  };
+
+  // Dropdown Toggle
+  document.getElementById('user-icon').onclick = function() {
+    const dropdown = document.getElementById('dropdown-content');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  };
+
+
+
+ 
+// Get the elements
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.querySelector('.overlay');
+const closeBtn = document.querySelector('.sidebar .close-btn');
+const logo = document.getElementById('logo'); // If logo is your button to toggle sidebar
+
+// Toggle the sidebar visibility
+logo.addEventListener('click', () => {
+  sidebar.style.left = '0'; // Slide the sidebar in
+  overlay.classList.add('active'); // Show the overlay
+});
+
+// Close the sidebar
+closeBtn.addEventListener('click', () => {
+  sidebar.style.left = '-250px'; // Slide the sidebar out
+  overlay.classList.remove('active'); // Hide the overlay
+});
+
+// Close sidebar if overlay is clicked
+overlay.addEventListener('click', () => {
+  sidebar.style.left = '-250px';
+  overlay.classList.remove('active');
+});
+
+// Sidebar Toggle
+document.getElementById('logo').onclick = function(event) {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+  overlay.classList.toggle('active');
+  event.stopPropagation();
+};
+
+// Close the sidebar
+document.getElementById('close-btn').onclick = function(event) {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  sidebar.style.left = '-250px';
+  overlay.classList.remove('active');
+  event.stopPropagation();
+};
+
+// Close sidebar if overlay is clicked
+overlay.addEventListener('click', () => {
+  sidebar.style.left = '-250px';
+  overlay.classList.remove('active');
+});
+
+// Dropdown Toggle
+document.getElementById('user-icon').onclick = function() {
+    const dropdown = document.getElementById('dropdown-content');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  };
+  </script>
 </body>
 </html>
