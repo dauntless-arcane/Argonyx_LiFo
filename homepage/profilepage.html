@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("../homepage/index/pfp.jpg"); /* Set the image URL here */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  overflow: auto; /* Ensure the body can scroll */
+  height: 100vh; /* Allow body to take full height */
+}
+
+
+        .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      padding: 10px 20px;
+      position: fixed;
+      width: 94%;
+      top: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      font-size: 1.1em;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #7f76b9;
+    }
+    .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Dropdown Menu */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+
+  /* Dropdown List */
+  .dropdown-content ul {
+    list-style-type: none;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  .dropdown-content ul li {
+    padding: 8px 16px;
+  }
+
+  /* Dropdown Link */
+  .dropdown-content ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 1.1em;
+    padding: 8px;
+  }
+
+  /* Hover Effect for Links */
+  .dropdown-content ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #7f76b9;
+  }
+
+  /* Show dropdown on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .user-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100%;
+      width: 250px;
+      background-color: transparent;
+      z-index: 999;
+      transition: left 0.3s ease-in-out;
+      padding: 80px 20px 20px 20px;
+      box-sizing: border-box;
+    }
+
+    .sidebar ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      display: inline;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar ul li:hover a {
+      opacity: 1;
+    }
+
+    .sidebar ul li .text-hover {
+      display: none;
+      margin-left: 10px;
+    }
+
+    .sidebar ul li:hover .text-hover {
+      display: inline;
+    }
+
+    .sidebar ul li img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .sidebar .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      z-index: 998;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+        .container {
+            display: flex;
+            width: 80%;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin-top: 120px;
+            padding: 20px; /* Add padding for better spacing */
+        }
+
+        .profile {
+            width: 30%;
+            text-align: center;
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+        }
+
+        .profile h2, .profile p {
+            margin: 5px 0;
+        }
+
+        .tabs {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            margin-top: 50px; /* Gap between profile and tabs */
+        }
+
+        .tab {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .info {
+            width: 70%;
+            display: none; /* Hide all info sections initially */
+            margin-top: 20px; /* Space above info sections */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 7px;
+        }
+
+        .active {
+            display: block; /* Show active tab content */
+        }
+
+        .personal-details, .to-do-list, .memories {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid white;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .change-pic {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .change-pic:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .memory-input {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .memory-input input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid white;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .memory-input input[type="file"] {
+            margin-right: 10px;
+        }
+
+        .memory-list {
+            margin-top: 10px;
+        }
+
+        .memory-item {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .memory-item img {
+            width: 100px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .upload-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .memories-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .memories-header h3 {
+            margin: 0;
+        }
+
+        .add-memory-btn {
+            background-color: rgba(0, 255, 0, 0.5);
+            border: none;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-memory-btn:hover {
+            background-color: rgba(0, 255, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo" id="logo">
+          <img src="l1200.jpg" alt="Logo">
+        </div>
+        <div class="nav-links">
+          <a href="../homepage/index/testing.html">Home</a>
+          <a href="../bookings/bookings.html">Trip & Bookings</a>
+          <a href="about.html">About Us</a>
+    
+          <div class="dropdown">
+            <img src="../profile.png" alt="User" id="user-icon" class="user-image">
+            <div class="dropdown-content" id="dropdown-content">
+              <a href="../homepage/profilepage.html">View Profile</a>
+              <a href="../homepage/index/index.html">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar" id="sidebar">
+        <span class="close-btn" id="close-btn">&times;</span>
+        <ul>
+          <li>
+            <a href="../homepage/explore/explore.html">
+              <img src="../homepage/index/map.png" class="sidebar-icon">
+              <span class="text-hover">Explore</span>
+            </a>
+          </li>
+          <li>
+            <a href="../homepage/food/food.html">
+              <img src="../homepage/index/eating.png" class="sidebar-icon">
+              <span class="text-hover">Eat</span>
+            </a>
+          </li>
+          <li>
+            <a href="shopping.html">
+              <img src="../homepage/index/shopping.png" class="sidebar-icon">
+              <span class="text-hover">Shopping</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://insider.in/bengaluru">
+              <img src="../homepage/index/event.png" class="sidebar-icon">
+              <span class="text-hover">Events</span>
+            </a>
+          </li>
+          <li>
+            <a href="../review page/review.html">
+              <img src="../homepage/index/like.png" class="sidebar-icon">
+              <span class="text-hover">Reviews</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    
+      <div class="overlay" id="overlay"></div>
+
+<div class="container">
+    <div class="profile">
+        <img id="profilePic" src="../homepage/profile.png" alt="Profile Picture">
+        <h2 id="username">[Your Name]</h2>
+        <p id="email">[Your Email]</p>
+        <button class="change-pic" onclick="selectProfilePic()">Change Picture</button>
+    </div>
+    
+    <div class="tabs">
+        <div class="tab" onclick="showTab('personal-details')">Personal Details</div>
+        <div class="tab" onclick="showTab('to-do-list')">To-Do List</div>
+        <div class="tab" onclick="showTab('memories')">Memories</div>
+    </div>
+
+    <div class="info personal-details active">
+        <h3>Personal Details</h3>
+        <table>
+            <tr>
+                <th>Username</th>
+                <td id="username-detail">[Your Name]</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td id="email-detail">[Your Email]</td>
+            </tr>
+            <tr>
+                <th>D.O.B.</th>
+                <td>[Your D.O.B]</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>[Your Address]</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="info to-do-list">
+        <h3>To-Do List</h3>
+        <div class="todo-item">
+            <input type="checkbox" id="task1">
+            <label for="task1">Sample Task 1</label>
+        </div>
+        <div class="todo-item">
+            <input type="checkbox" id="task2">
+            <label for="task2">Sample Task 2</label>
+        </div>
+        <div class="todo-item">
+            <input type="checkbox" id="task3">
+            <label for="task3">Sample Task 3</label>
+        </div>
+        <!-- More tasks can be dynamically added here -->
+    </div>
+
+    <div class="info memories">
+        <div class="memories-header">
+            
+            
+       <h3>Add Pictures/Journals</h3>
+   </div>
+   <div class="memory-input">
+       <input type="text" id="memoryText" placeholder="Write a memory...">
+       <input type="file" id="memoryImage" accept="image/*">
+       <button class="add-memory-btn" onclick="addMemory()">Add Memory</button>
+   </div>
+   <div class="memory-list" id="memoryList"></div>
+</div>
+</div>
+
+<script>
+function selectProfilePic() {
+   const newPic = prompt("Enter the URL of the new profile picture:");
+   if (newPic) {
+       document.getElementById('profilePic').src = newPic;
+   }
+}
+
+function navigateTo(page) {
+   alert(`Navigating to ${page}`);
+}
+
+function showTab(tabName) {
+   const tabs = document.querySelectorAll('.info');
+   tabs.forEach(tab => {
+       tab.classList.remove('active');
+   });
+   document.querySelector(`.${tabName}`).classList.add('active');
+}
+
+function addMemory() {
+   const memoryText = document.getElementById('memoryText').value;
+   const memoryList = document.getElementById('memoryList');
+
+   if (memoryText) {
+       const memoryItem = document.createElement('div');
+       memoryItem.className = 'memory-item';
+       memoryItem.textContent = memoryText;
+       memoryList.appendChild(memoryItem);
+       document.getElementById('memoryText').value = ''; // Clear the input field
+   } else {
+       alert("Please enter a memory before adding.");
+   }
+}
+
+function addMemoryImage() {
+   const memoryImageInput = document.getElementById('memoryImage');
+   const file = memoryImageInput.files[0];
+
+   if (file) {
+       const reader = new FileReader();
+       reader.onload = function(event) {
+           const memoryList = document.getElementById('memoryList');
+           const memoryItem = document.createElement('div');
+           memoryItem.className = 'memory-item';
+           const img = document.createElement('img');
+           img.src = event.target.result;
+           img.style.width = '100px'; // Set a fixed width for images
+           img.style.borderRadius = '5px'; // Add some styling
+           memoryItem.appendChild(img);
+           memoryList.appendChild(memoryItem);
+       }
+       reader.readAsDataURL(file);
+       memoryImageInput.value = ''; // Clear the input field
+   } else {
+       alert("Please select an image before adding.");
+   }
+}
+
+document.getElementById('logo').onclick = function(event) {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+      overlay.classList.toggle('active');
+      event.stopPropagation();
+    };
+
+    document.getElementById('close-btn').onclick = function(event) {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = '-250px';
+      overlay.classList.remove('active');
+      event.stopPropagation();
+    };
+
+    document.body.onclick = function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.style.left = '-250px';
+      overlay.classList.remove('active');
+    };
+
+    document.getElementById('sidebar').onclick = function(event) {
+      event.stopPropagation();
+    };
+
+    // Dropdown Toggle
+    document.getElementById('user-icon').onclick = function() {
+      const dropdown = document.getElementById('dropdown-content');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    };
+
+
+
+   
+  // Get the elements
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.overlay');
+  const closeBtn = document.querySelector('.sidebar .close-btn');
+  const logo = document.getElementById('logo'); // If logo is your button to toggle sidebar
+  
+  // Toggle the sidebar visibility
+  logo.addEventListener('click', () => {
+    sidebar.style.left = '0'; // Slide the sidebar in
+    overlay.classList.add('active'); // Show the overlay
+  });
+
+  // Close the sidebar
+  closeBtn.addEventListener('click', () => {
+    sidebar.style.left = '-250px'; // Slide the sidebar out
+    overlay.classList.remove('active'); // Hide the overlay
+  });
+
+  // Close sidebar if overlay is clicked
+  overlay.addEventListener('click', () => {
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+  });
+
+  // Sidebar Toggle
+document.getElementById('logo').onclick = function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+    overlay.classList.toggle('active');
+    event.stopPropagation();
+};
+
+// Close the sidebar
+document.getElementById('close-btn').onclick = function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+    event.stopPropagation();
+};
+
+// Close sidebar if overlay is clicked
+overlay.addEventListener('click', () => {
+    sidebar.style.left = '-250px';
+    overlay.classList.remove('active');
+});
+
+// Dropdown Toggle
+document.getElementById('user-icon').onclick = function() {
+      const dropdown = document.getElementById('dropdown-content');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    };
+    </script>
+</body>
+</html>
